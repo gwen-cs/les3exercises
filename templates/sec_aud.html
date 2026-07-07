@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Security Audit - {{ name }}</title>
+</head>
+<body>
+    <H1>Security Audit</H1>
+    <h2>User: {{ user.username }}</h2>
+    <ul>
+        <li>
+            role: {{ user.role }}
+        </li>
+        <li>
+            email address: {{ user.email }}
+        </li>
+    </ul>
+    <h2>Audit results</h2>
+    <ul>
+        <li>
+            compliant: {{ "yes" if is_compliant else "no"  }}
+        </li>
+        <li>
+            score: {{ score }}
+        </li>
+    </ul>
+    <main>
+        {% if is_compliant %}
+        <img src="{{url_for('static', filename = 'pictures/compliant.png' ) }} "
+             alt="">
+        {% else %}
+        <img src="{{url_for('static', filename = 'pictures/non-compliant.png' ) }} "
+             alt="">
+        {% endif %}
+    </main>
+
+
+
+</body>
+</html>

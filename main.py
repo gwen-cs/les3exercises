@@ -1,5 +1,12 @@
 from flask import Flask, render_template, jsonify
 from users import USERS
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+MIN_PASSWORD_LENGHT = int(os.getenv("MIN_PASSWORD_LENGHT"))
+MIN_PASSWORD_AGE = int(os.getenv("MIN_PASSWORD_AGE"))
 
 app = Flask(__name__)
 
@@ -35,12 +42,12 @@ def security (name):
 
 
 def password_length (user):
-    if user["password_length"] >= 12:
+    if user["password_length"] >= MIN_PASSWORD_LENGHT :
         return 20
     return 0
 
 def password_last_changed_days (user):
-    if user["password_last_changed_days"] <= 180:
+    if user["password_last_changed_days"] <= MIN_PASSWORD_AGE:
         return 20
     return 0
 
